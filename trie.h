@@ -1,26 +1,32 @@
 #ifndef _TRIE_
 #define _TRIE_
 #define Letters 26
-
+#include <stdbool.h>
+#include <stdio.h>
 
 
 typedef struct node
 {
-    char letter ;
+    bool flag;
+    bool flag2;
     struct node* childs[Letters];
     long unsigned int count ;
 
 }node;
 
-
+void totalPrint(char c,node *root, char * str, int index);
 
 void insert(node* root , char* newLetter);
 
-int takeLetterFromIndex(char*);
+void print(node *root, char * str, int index);
+
+void printR(node *root, char * str, int index);
+
+int StoptheRec(node *current);
 
 node* newNode();
 
-
+void FreeTheTree(node* );
 
 
 #endif 
