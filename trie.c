@@ -107,6 +107,6 @@ void FreeTheTree(node* root){
             FreeTheTree((pointer->childs[i]));
         }
     }
-    free(pointer);
+    FreeTheTree(pointer);
 }
 
