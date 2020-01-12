@@ -4,28 +4,39 @@
 #include <stdbool.h>
 #include "trie.c"
 #include "trie.h"
-
+#define WORD 256
+#define LINE 1024
 int main(int argc, char const *argv[])
 {
+    char word[WORD];
+    char buffer[LINE];
+    char command;
+    int count = 0;
+    int buffe_len = 0 ;
     node* root = newNode();
-    char* c = "aladin";
-    char* t = "aladin";
-    char* e = "alad";
-    char* r = "ala";
-    char* w = "bla";
-    char* q = "blab";
-    char* qq = "blag";
-    char DDD[100000];
-    insert(root,w);
-    insert(root,t);
-    insert(root ,c);
-    insert(root,q);
-    insert(root,e);
-    insert(root,r);
-    insert(root,qq);
-    //printR(root,DDD,0);
-    char k = 'r';
-    totalPrint(k,root,DDD,0);
+    for (size_t k = 1; k < LINE; k++)
+        {
+            count = 0 ;
+            fgets(buffer, LINE, stdin);
+            buffe_len = strlen(buffer);
+            for (size_t i = 0; i < buffe_len ; i++)
+            {
+                if((buffer[i] != ' ' && buffer[i] != '\0' && buffer[i] != '\t' && buffer[i] != '\n' && buffer[i]) && buffer[i] >= 97 && buffer[i] <= 122)
+                {
+                word[count] = buffer[i];
+                count++;
+                }
+                else (buffer[i] != ' ' && buffer[i] != '\0' && buffer[i] != '\t' && buffer[i] != '\n' && buffer[i]);
+                {
+                    insert(root , word);
+                    count = 0 ;
+                }
+            }
+        }
+
+
+    char k = *argv[1];
+    totalPrint(k,root,"",0);
     FreeTheTree(root);
     return 0;
 

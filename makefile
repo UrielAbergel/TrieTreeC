@@ -13,12 +13,12 @@ trie.o: trie.c trie.h
 	$(CC) -c trie.c
 
 mains:main.o trie.a
-	$(CC) $(FLAGS) -o  ‫‪frequency‬‬ main.o trie.a 
+	$(CC) $(FLAGS) -o  ‫‪main‬‬ main.o trie.a 
 
 main.o:main.c trie.h
 	$(CC) -c main.c
 
-.PHONY:clean  all
+.PHONY:clean  
 
 clean:
-	rm -f *.o *.a *.so frequency‬‬
+	rm -f *.o *.a *.so main
