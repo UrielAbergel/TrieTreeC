@@ -2,23 +2,13 @@
 CC=gcc
 FLAGS= -Wall -g
 
-all:tries mains
+all:frequency 
 
-tries:trie.a
-
-trie.a:trie.o trie.h
-	 ar rcs trie.a trie.o trie.h
-
-trie.o: trie.c trie.h 
-	$(CC) -c trie.c
-
-mains:main.o trie.a
-	$(CC) $(FLAGS) -o  ‫‪main‬‬ main.o trie.a 
+frequency:main.c trie.c 
+	$(CC) $(FLAGS) main.c trie.c -o frequency
 
 main.o:main.c trie.h
-	$(CC) -c main.c
-
-.PHONY:clean  
+	$(CC) $(FLAGS) -c main.c	
 
 clean:
-	rm -f *.o *.a *.so main
+	rm -f *.o *.a *.so frequency

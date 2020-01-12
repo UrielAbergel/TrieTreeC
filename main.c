@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "trie.c"
 #include "trie.h"
 #define WORD 256
-#define LINE 1024
+#define LINE 256
 int main(int argc, char const *argv[])
 {
     char word[WORD];
@@ -14,19 +13,18 @@ int main(int argc, char const *argv[])
     int count = 0;
     int buffe_len = 0 ;
     node* root = newNode();
-    for (size_t k = 1; k < LINE; k++)
+    while(fgets(buffer, LINE, stdin))
         {
             count = 0 ;
-            fgets(buffer, LINE, stdin);
             buffe_len = strlen(buffer);
             for (size_t i = 0; i < buffe_len ; i++)
             {
-                if((buffer[i] != ' ' && buffer[i] != '\0' && buffer[i] != '\t' && buffer[i] != '\n' && buffer[i]) && buffer[i] >= 97 && buffer[i] <= 122)
+                if(buffer[i] != ' ' && buffer[i] != '\0' && buffer[i] != '\t' && buffer[i] != '\n'  && buffer[i] >= 97 && buffer[i] <= 122)
                 {
                 word[count] = buffer[i];
                 count++;
                 }
-                else (buffer[i] != ' ' && buffer[i] != '\0' && buffer[i] != '\t' && buffer[i] != '\n' && buffer[i]);
+                else if(buffer[i] != ' ' && buffer[i] != '\0' && buffer[i] != '\t' && buffer[i] != '\n')
                 {
                     insert(root , word);
                     count = 0 ;
@@ -35,8 +33,8 @@ int main(int argc, char const *argv[])
         }
 
 
-    char k = *argv[1];
-    totalPrint(k,root,"",0);
+    command = *argv[1];
+    totalPrint(command,root,"",0);
     FreeTheTree(root);
     return 0;
 
