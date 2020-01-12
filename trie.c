@@ -3,6 +3,10 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#define a 97
+#define z 122
+#define max 1024
+#define childrens 25
 
 void insert(node *root, char *newLetter)
 {
@@ -11,14 +15,14 @@ void insert(node *root, char *newLetter)
 
     for (size_t i = 0; i < len; i++)
     {
-        if (capish->childs[*(newLetter + i) - 97])
+        if (capish->childs[*(newLetter + i) - a])
         {
-            capish = capish->childs[*(newLetter + i) - 97];
+            capish = capish->childs[*(newLetter + i) - a];
         }
         else
         {
-            capish->childs[*(newLetter + i) - 97] = (node *)malloc(sizeof(node));
-            capish = capish->childs[*(newLetter + i) - 97];
+            capish->childs[*(newLetter + i) - a] = (node *)malloc(sizeof(node));
+            capish = capish->childs[*(newLetter + i) - a];
         }
     }
     capish->count = capish->count + 1;
@@ -30,7 +34,7 @@ node *newNode()
     newNodeP->count = 0;
     newNodeP->flag = false;
     newNodeP->flag2 = false;
-    for (size_t i = 0; i < 25; i++)
+    for (size_t i = 0; i < childrens; i++)
     {
         newNodeP->childs[i] = NULL;
     }
@@ -67,7 +71,7 @@ void print(node *root, char *str, int index)
     {
         if (root->childs[i])
         {
-            str[index] = (char)(97 + i);
+            str[index] = (char)(a + i);
             print(root->childs[i], str, index + 1);
         }
     }
@@ -87,7 +91,7 @@ void printR(node *root, char *str, int index)
     {
         if (root->childs[i])
         {
-            str[index] = (char)(97 + i);
+            str[index] = (char)(a + i);
             printR(root->childs[i], str, index + 1);
         }
     }
@@ -102,7 +106,7 @@ void printR(node *root, char *str, int index)
 int StoptheRec(node *current)
 {
     int flag = 0;
-    for (size_t i = 0; i < 26; i++)
+    for (size_t i = 0; i < childrens+1; i++)
     {
         if (current->childs[i])
             flag = 1;
@@ -125,7 +129,7 @@ void FreeTheTree(node *root)
 
 void resetWord(char *word)
 {
-    for (int i = 0; i < 256; ++i)
+    for (int i = 0; i < max; ++i)
     {
         word[i] = '\n';
     }

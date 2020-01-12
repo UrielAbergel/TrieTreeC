@@ -3,9 +3,12 @@
 #include <string.h>
 #include <stdbool.h>
 #include "trie.h"
-
-#define WORD 256
-#define LINE 1024
+#define A 65
+#define Z 90
+#define a 97
+#define z 122
+#define WORD 1024
+#define LINE 1000000
 int main(int argc, char const *argv[])
 {
     char word[WORD];
@@ -13,7 +16,6 @@ int main(int argc, char const *argv[])
     size_t count = 0;
     int buffe_len = 0;
     node *root = newNode();
-    //char* line = "aba glida lala";
     while (fgets(buffer, sizeof(buffer), stdin))
     {
         buffer[strlen(buffer)] = ' ';
@@ -21,7 +23,10 @@ int main(int argc, char const *argv[])
         buffe_len = strlen(buffer);
         for (size_t i = 0; i < buffe_len; i++)
         {
-            if (buffer[i] != ' ' && buffer[i] != '\0' && buffer[i] != '\t' && buffer[i] != '\n' && buffer[i] >= 97 && buffer[i] <= 122)
+            if(buffer[i] >= A && buffer[i] <= Z){
+                buffer[i] = buffer[i]+32;
+            }
+            if (buffer[i] != ' ' && buffer[i] != '\0' && buffer[i] != '\t' && buffer[i] != '\n' && buffer[i] >= a && buffer[i] <= z)
             {
                 word[count] = buffer[i];
                 count++;
