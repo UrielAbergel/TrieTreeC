@@ -28,5 +28,7 @@ node* newNode();
 
 void FreeTheTree(node* );
 
+void resetWord(char *word);
+
 
 #endif 
