@@ -55,13 +55,13 @@ void print(node *root, char *str, int index)
     if (!StoptheRec(root))
     {
         str[index] = '\0';
-        printf("%s %ld \n", str, root->count);
+        printf("%s %ld\n", str, root->count);
         return;
     }
     if (root->count > 0)
     {
         str[index] = '\0';
-        printf("%s %ld \n", str, root->count);
+        printf("%s %ld\n", str, root->count);
     }
     for (int i = 0; i < Letters; i++)
     {
@@ -79,7 +79,7 @@ void printR(node *root, char *str, int index)
     if (!StoptheRec(root))
     {
         str[index] = '\0';
-        printf("%s %ld \n", str, root->count);
+        printf("%s %ld\n", str, root->count);
         return;
     }
   
@@ -95,7 +95,7 @@ void printR(node *root, char *str, int index)
     {
         if(str[0] == '\0') return;
         str[index] = '\0';
-        printf("%s %ld \n", str, root->count);
+        printf("%s %ld\n", str, root->count);
     }
 }
 
