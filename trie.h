@@ -14,7 +14,6 @@ typedef struct node
 
 }node;
 
-void totalPrint(char c,node *root, char * str, int index);
 
 void insert(node* root , char* newLetter);
 

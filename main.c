@@ -11,41 +11,57 @@
 #define LINE 1000000
 int main(int argc, char const *argv[])
 {
-    char word[WORD];
-    char buffer[LINE];
-    size_t count = 0;
-    int buffe_len = 0;
+    int MAXSIZE = 256;
+    char* word = (char*)malloc(sizeof(char)*MAXSIZE);
+    char * buffer = NULL;
+    int countToMax = 0;
+    int lookForEnd = 0;
     node *root = newNode();
-    while (fgets(buffer, sizeof(buffer), stdin))
+    char CurrentChar = getchar();
+    while ((CurrentChar==EOF&&lookForEnd!=1)||CurrentChar!=EOF)
     {
-        buffer[strlen(buffer)] = ' ';
-        count = 0;
-        buffe_len = strlen(buffer);
-        for (size_t i = 0; i < buffe_len; i++)
+
+        if(CurrentChar >= A && CurrentChar <= Z){
+            CurrentChar = CurrentChar+32;
+        }
+        if (CurrentChar != ' ' && CurrentChar != '\0' && CurrentChar != '\t' && CurrentChar != '\n' && CurrentChar >= a && CurrentChar <= z)
         {
-            if(buffer[i] >= A && buffer[i] <= Z){
-                buffer[i] = buffer[i]+32;
+            if(countToMax==MAXSIZE) {
+                buffer = (char *) realloc(word, (MAXSIZE * 2) * sizeof(char));
+                MAXSIZE = MAXSIZE * 2;
+                if (buffer == NULL && word != NULL) {
+                    free(word);
+                    return -1;
+                }
+                word = (char*)calloc(MAXSIZE, sizeof(char));
+                strcpy(word,buffer);
+                free(buffer);
             }
-            if (buffer[i] != ' ' && buffer[i] != '\0' && buffer[i] != '\t' && buffer[i] != '\n' && buffer[i] >= a && buffer[i] <= z)
+
+            word[countToMax] = CurrentChar;
+            countToMax++;
+
+        }
+
+        else if ((CurrentChar == ' ' || CurrentChar == '\0' || CurrentChar == '\t' || CurrentChar == '\n') || CurrentChar == EOF)
+        {
+
+            if (word[0] != '\n')
             {
-                word[count] = buffer[i];
-                count++;
-            }
-            else if ((buffer[i] == ' ' || buffer[i] == '\0' || buffer[i] == '\t' || buffer[i] == '\n'))
-            {
-                if (word[0] != '\n')
+                if (word[0] != '\0')
                 {
-                    if (word[0] != '\0')
-                    {
-                        word[count] = '\0';
-                        insert(root, word);
-                        resetWord(word);
-                        count = 0;
-                    }
+                    word[countToMax] = '\0';
+                    insert(root, word);
+                    resetWord(word);
+                    countToMax = 0;
                 }
             }
         }
+        if(CurrentChar == EOF) lookForEnd = 1;
+
+        CurrentChar = getchar();
     }
+
     if (argc == 2 && strcmp(argv[1], "r")==0)
     {
         printR(root, word, 0);

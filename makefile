@@ -10,7 +10,5 @@ frequency:main.c trie.c
 main.o:main.c trie.h
 	$(CC) $(FLAGS) -c main.c	
 
-PHONY:all 
-
 clean:
 	rm -f *.o *.a *.so frequency

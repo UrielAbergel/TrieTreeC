@@ -3,10 +3,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#define a 97
-#define z 122
-#define max 1024
-#define childrens 25
 
 void insert(node *root, char *newLetter)
 {
@@ -15,14 +11,14 @@ void insert(node *root, char *newLetter)
 
     for (size_t i = 0; i < len; i++)
     {
-        if (capish->childs[*(newLetter + i) - a])
+        if (capish->childs[*(newLetter + i) - 97])
         {
-            capish = capish->childs[*(newLetter + i) - a];
+            capish = capish->childs[*(newLetter + i) - 97];
         }
         else
         {
-            capish->childs[*(newLetter + i) - a] = (node *)malloc(sizeof(node));
-            capish = capish->childs[*(newLetter + i) - a];
+            capish->childs[*(newLetter + i) - 97] = (node *)malloc(sizeof(node));
+            capish = capish->childs[*(newLetter + i) - 97];
         }
     }
     capish->count = capish->count + 1;
@@ -34,44 +30,32 @@ node *newNode()
     newNodeP->count = 0;
     newNodeP->flag = false;
     newNodeP->flag2 = false;
-    for (size_t i = 0; i < childrens; i++)
+    for (size_t i = 0; i < 25; i++)
     {
         newNodeP->childs[i] = NULL;
     }
     return newNodeP;
 }
 
-void totalPrint(char c, node *root, char *str, int index)
-{
-    if (c == 'r')
-    {
-        printR(root, str, index);
-    }
-    else
-    {
-        print(root, str, index);
-    }
-}
 
 void print(node *root, char *str, int index)
 {
-
     if (!StoptheRec(root))
     {
         str[index] = '\0';
-        printf("%s %ld\n", str, root->count);
+        printf("%s %ld \n", str, root->count);
         return;
     }
     if (root->count > 0)
     {
         str[index] = '\0';
-        printf("%s %ld\n", str, root->count);
+        printf("%s %ld \n", str, root->count);
     }
     for (int i = 0; i < Letters; i++)
     {
         if (root->childs[i])
         {
-            str[index] = (char)(a + i);
+            str[index] = (char)(97 + i);
             print(root->childs[i], str, index + 1);
         }
     }
@@ -83,30 +67,32 @@ void printR(node *root, char *str, int index)
     if (!StoptheRec(root))
     {
         str[index] = '\0';
-        printf("%s %ld\n", str, root->count);
+        printf("%s %ld \n", str, root->count);
         return;
     }
-  
+
     for (int i = Letters - 1; i >= 0; i--)
     {
         if (root->childs[i])
         {
-            str[index] = (char)(a + i);
+            str[index] = (char)(97 + i);
             printR(root->childs[i], str, index + 1);
         }
     }
-        if (root->count > 0)
+    if (root->count > 0)
     {
-        if(str[0] == '\0') return;
         str[index] = '\0';
-        printf("%s %ld\n", str, root->count);
+        if(str[0] == '\0') {return;}
+
+            printf("%s %ld \n", str, root->count);
+
     }
 }
 
 int StoptheRec(node *current)
 {
     int flag = 0;
-    for (size_t i = 0; i < childrens+1; i++)
+    for (size_t i = 0; i < 26; i++)
     {
         if (current->childs[i])
             flag = 1;
@@ -129,7 +115,7 @@ void FreeTheTree(node *root)
 
 void resetWord(char *word)
 {
-    for (int i = 0; i < max; ++i)
+    for (int i = 0; i < 256; ++i)
     {
         word[i] = '\n';
     }
