@@ -7,8 +7,6 @@
 #define Z 90
 #define a 97
 #define z 122
-#define WORD 1024
-#define LINE 1000000
 int main(int argc, char const *argv[])
 {
     // make a start word in size 256 
