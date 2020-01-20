@@ -42,6 +42,7 @@ int main(int argc, char const *argv[])
             countToMax++;
 
         }
+	
 
         else if ((CurrentChar == ' ' || CurrentChar == '\0' || CurrentChar == '\t' || CurrentChar == '\n') || CurrentChar == EOF)
         {
@@ -70,6 +71,7 @@ int main(int argc, char const *argv[])
     {
         print(root, word, 0);
     }
+	free(word);
     FreeTheTree(root);
     return 0;
 }
