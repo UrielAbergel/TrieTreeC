@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+//insert to the tree
 void insert(node *root, char *newLetter)
 {
     node *capish = root;
@@ -23,7 +24,7 @@ void insert(node *root, char *newLetter)
     }
     capish->count = capish->count + 1;
 }
-
+// add new node with nulls
 node *newNode()
 {
     node *newNodeP = (node *)malloc(sizeof(node));
@@ -37,7 +38,7 @@ node *newNode()
     return newNodeP;
 }
 
-
+//print none reverse
 void print(node *root, char *str, int index)
 {
     if (!StoptheRec(root))
@@ -60,7 +61,7 @@ void print(node *root, char *str, int index)
         }
     }
 }
-
+//print reverse
 void printR(node *root, char *str, int index)
 {
 
@@ -88,7 +89,7 @@ void printR(node *root, char *str, int index)
 
     }
 }
-
+ // stop the rec if you got there
 int StoptheRec(node *current)
 {
     int flag = 0;
@@ -99,7 +100,7 @@ int StoptheRec(node *current)
     }
     return flag;
 }
-
+//free the bytes in the tree
 void FreeTheTree(node *root)
 {
     node *pointer = root;
@@ -112,7 +113,7 @@ void FreeTheTree(node *root)
     }
     free(pointer);
 }
-
+//reset word with / 0 
 void resetWord(char *word)
 {
     for (int i = 0; i < 256; ++i)
